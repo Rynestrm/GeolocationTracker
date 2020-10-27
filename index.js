@@ -19,10 +19,6 @@ function success(pos) {
     var crd = pos.coords;
     const lat = crd.latitude;
     const lng = crd.longitude;
-    // L.marker([lat, lng]).addTo(map)
-    // .bindPopup(`Latitude: ${lat} <br> Longitude: ${lng}`)
-    // .openPopup();
-    // map.setView([lat, lng], 13);
     locationLog(lat, lng);
 }
 
@@ -34,7 +30,7 @@ async function locationLog(lat, lng){
     .bindPopup(`Location: ${data}`)
     .openPopup();
     map.setView(data);
-}
+};
     
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
