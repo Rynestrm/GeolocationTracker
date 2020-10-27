@@ -1,8 +1,4 @@
-let latDisplay = document.querySelector(".lat");
-let lngDisplay = document.querySelector(".lng");
-let personLocation = [0, 0];
-// latDisplay.innerHTML = "Your Latitude " + lat;
-// lngDisplay.innerHTML = "Your Longitude" + lng;
+let positonArray = [0, 0];
 navigator.geolocation.watchPosition(success, error, options);
 var map = L.map('mapid').setView([51.505, -0.09], 13);
 var options = {
@@ -23,21 +19,21 @@ function success(pos) {
     var crd = pos.coords;
     const lat = crd.latitude;
     const lng = crd.longitude;
-    personLocation.push(lat, lng)
-    // console.log(lat);
-    L.marker([lat, lng]).addTo(map)
-    .bindPopup(`Latitude: ${lat} <br> Longitude: ${lng}`)
-    .openPopup();
-    map.setView([lat, lng], 13);
-    locationLog(personLocation);
+    // L.marker([lat, lng]).addTo(map)
+    // .bindPopup(`Latitude: ${lat} <br> Longitude: ${lng}`)
+    // .openPopup();
+    // map.setView([lat, lng], 13);
+    locationLog(lat, lng);
 }
 
-async function locationLog(personLocation){
-    const responce = await fetch(`https://elated-payne-827778.netlify.app/.netlify/functions/hello?vote=${personLocation}`);
+async function locationLog(lat, lng){
+    const responce = await fetch(`https://elated-payne-827778.netlify.app/.netlify/functions/hello?lat=${lat}&lng=${lng}`);
     console.log(responce);
     const data = await responce.json();
-    console.log(data);
-    // map.setView(personLocation, 13);
+    L.marker(data).addTo(map)
+    .bindPopup(`Location: ${data}`)
+    .openPopup();
+    map.setView(data);
 }
     
 function error(err) {
