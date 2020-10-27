@@ -1,3 +1,5 @@
+let latDisplay = document.querySelector(".lat");
+let lngDisplay = document.querySelector(".lng");
 navigator.geolocation.watchPosition(success, error, options);
 var map = L.map('mapid').setView([51.505, -0.09], 13);
 var options = {
@@ -24,6 +26,8 @@ function success(pos) {
     const lat = crd.latitude;
     const lng = crd.longitude;
     console.log(lat);
+    latDisplay.innerHTML = "Your Latitude " + lat;
+    lngDisplay.innerHTML = "Your Longitude" + lng;
     L.marker([lat, lng]).addTo(map)
     .bindPopup('Your Location.')
     .openPopup();
