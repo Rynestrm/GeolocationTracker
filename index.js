@@ -29,7 +29,7 @@ function success(pos) {
     latDisplay.innerHTML = "Your Latitude " + lat;
     lngDisplay.innerHTML = "Your Longitude" + lng;
     L.marker([lat, lng]).addTo(map)
-    .bindPopup('Your Location.')
+    .bindPopup(`Latitude: ${lat} <br> Longitude: ${lng}`)
     .openPopup();
     map.setView([lat, lng], 13);
 }
