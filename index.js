@@ -19,17 +19,19 @@ function success(pos) {
     var crd = pos.coords;
     const lat = crd.latitude;
     const lng = crd.longitude;
+    map.setView([lat, lng], 13);
     locationLog(lat, lng);
 }
 
 async function locationLog(lat, lng){
     const responce = await fetch(`https://elated-payne-827778.netlify.app/.netlify/functions/hello?lat=${lat}&lng=${lng}`);
-    console.log(responce);
+    setInterval(
+    console.log(responce), 5000);
     const data = await responce.json();
     L.marker(data).addTo(map)
     .bindPopup(`Location: ${data}`)
-    .openPopup();
-    map.setView(data);
+    // .openPopup();
+    // map.setView(data, 13);
 };
     
 function error(err) {
